@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Document Intelligence</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <script>
+        function updateFormHeading() {
+            const serviceSelect = document.getElementById('service-select');
+            const formHeading = document.getElementById('form-heading');
+            if (serviceSelect.value === 'Invoices') {
+                formHeading.textContent = 'Upload Invoice';
+            } else if (serviceSelect.value === 'Receipts') {
+                formHeading.textContent = 'Upload Receipt';
+            } else if (serviceSelect.value === 'Other Documents') {
+                formHeading.textContent = 'Other Documents';
+            }
+        }
+
+        function toggleInputMethod() {
+            const fileInputSection = document.getElementById('file-input-section');
+            const urlInputSection = document.getElementById('url-input-section');
+            const methodSelect = document.querySelector('input[name="input-method"]:checked').value;
+
+            if (methodSelect === 'file') {
+                fileInputSection.style.display = 'block';
+                urlInputSection.style.display = 'none';
+            } else {
+                fileInputSection.style.display = 'none';
+                urlInputSection.style.display = 'block';
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById('service-select').addEventListener('change', updateFormHeading);
+            document.querySelectorAll('input[name="input-method"]').forEach((elem) => {
+                elem.addEventListener('change', toggleInputMethod);
+            });
+            // Initialize heading and input method on page load
+            updateFormHeading();
+            toggleInputMethod();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="../static/lagozon.png" alt="Company Logo">
+            <h1>Finance Document Intelligence</h1>
+        </div>
+
+
+        <div class="upload-form">
+            <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Select Document Type:</legend>
+                    <select id="service-select" name="service-select">
+                        <option value="Invoices">Invoices</option>
+                        <option value="Receipts">Receipts</option>
+                        <option value="Other Documents">Other Documents</option>
+                    </select>
+                </fieldset>
+                <h2 id="form-heading">Upload Invoice</h2>
+
+                <fieldset>
+                    <legend>Select Input:</legend>
+                    <label>
+                        <input type="radio" name="input-method" value="file" checked>
+                        Upload File
+                    </label>
+                    <label>
+                        <input type="radio" name="input-method" value="url">
+                        Enter URL
+                    </label>
+                </fieldset>
+
+                <div id="file-input-section">
+                    <input type="file" name="file">
+                </div>
+                <div id="url-input-section" style="display: none;">
+                    <label for="bill_url">Enter link of the document:</label>
+                    <input type="text" id="bill_url" name="bill_url" placeholder="Paste Your Link of Document">
+                </div>
+                <input type="submit" value="Analyze">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

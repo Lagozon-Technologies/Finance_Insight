@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style_res.css">
+    <title>Finance Insight - Results</title>
+
+</head>
+
+<body>
+    <div class="headerr">
+        <img src="static/lagozon.png" alt="">
+        <h2>Finance Insight</h2>
+
+    </div>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            {% for invoice in results %}
+            {% for key, value in invoice.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </table>
+
+
+    </div>
+    <input type="button" value="Add Data" class="upload-button">
+
+</body>
+
+</html>
