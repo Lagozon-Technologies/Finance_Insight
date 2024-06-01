@@ -1,1 +1,216 @@
+/* Global Styles */
+body,
+h1,
+p,
+a {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
+/* Navbar Styles */
+.nav-wrapper {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+#form-heading{
+    margin: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #3E4095;
+    /* Deep Blue for Contrast */
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FFA500;
+    /* Lighter Orange Color for Hover */
+}
+
+/* Footer Styles */
+.page-footer {
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Container Styles */
+.container {
+    width: 80%;
+    max-width: 960px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header img {
+    width: 150px;
+    /* Adjust based on your logo's dimensions */
+}
+
+.header h1 {
+    color: #3e4095;
+    /* Adding a touch of corporate color */
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.header p.tagline {
+    color: #333;
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+legend {
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+label {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+
+
+input[type="submit"] {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #3e4095;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #F1AB45;
+}
+
+input[type="submit"]:focus {
+    background-color: #F1AB45;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #3e4095;
+    /* Adjust the color to match your site's theme */
+}
+
+#service-select {
+    width: 50%; /* Adjust the width as needed */
+    padding: 10px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+.headerr {
+    display: flex;
+    align-items: center;
+}
+.headerr img{
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+}
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px var(--green);
+    }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    form {
+        width: 100%;
+    }
+}
