@@ -34,8 +34,8 @@ def upload_file():
         poller_method = 'prebuilt-invoice'
     elif service == 'Receipts':
         poller_method = 'prebuilt-receipt'
-    elif service == 'Other Documents':
-        poller_method = 'finance_insight_1'
+    elif service == 'AWB':
+        poller_method = 'finance_insight'
     
     if input_method == 'file' and 'file' in request.files:
         file = request.files['file']
@@ -145,89 +145,65 @@ def upload_file():
                 receipt_data["Total"] = total.value
 
         results.append(receipt_data)
-    elif poller_method == 'finance_insight_1':
+    elif poller_method == 'finance_insight':
         for idx, doc in enumerate(bill_data.documents):
             doc_data = {}
 
-            doc_type = doc.fields.get('bill_type')
-            if doc_type.value is not None:
-                doc_data["Bill Type"] = doc_type.value
+            shipping_address = doc.fields.get('shipping_address')
+            if shipping_address.value is not None:
+                doc_data["Shipping Address"] = shipping_address.value
 
-            po_date = doc.fields.get('po_date')
-            if po_date.value is not None:
-                doc_data["PO Date"] = po_date.value
+            consignee_name = doc.fields.get('consignee_name')
+            if consignee_name.value is not None:
+                doc_data["Consignee Name"] = consignee_name.value
+
+            shipper_name = doc.fields.get('shipper_name')
+            if shipper_name.value is not None:
+                doc_data["Shipper Name"] = shipper_name.value
+
+            consignee_address = doc.fields.get('consignee_address')
+            if consignee_address.value is not None:
+                doc_data["Consignee Address"] = consignee_address.value
+
+            airway_bill_number = doc.fields.get('airway_bill_number')
+            if airway_bill_number.value is not None:
+                doc_data["Airway Bill Number"] = airway_bill_number.value
+
+            issuer = doc.fields.get('Issuer')
+            if issuer.value is not None:
+                doc_data["Issuer"] = issuer.value
+
+            total_weight = doc.fields.get('total_weight')
+            if total_weight.value is not None:
+                doc_data["Total Weight"] = total_weight.value
+
+            execution_date = doc.fields.get('execution_date')
+            if execution_date.value is not None:
+                doc_data["Execution Date"] = execution_date.value
+
+            total_bill = doc.fields.get('total_bill')
+            if total_bill.value is not None:
+                doc_data["Total Bill"] = total_bill.value
 
             currency = doc.fields.get('currency')
             if currency.value is not None:
                 doc_data["Currency"] = currency.value
 
-            company_name = doc.fields.get('company_name')
-            if company_name.value is not None:
-                doc_data["Company Name"] = company_name.value
+            departure_airport = doc.fields.get('departure_airport')
+            if departure_airport.value is not None:
+                doc_data["Departure Airport"] = departure_airport.value
 
-            invoice_no = doc.fields.get('invoice_no')
-            if invoice_no.value is not None:
-                doc_data["Invoice Number"] = invoice_no.value
+            destination_airport = doc.fields.get('destination_airport')
+            if destination_airport.value is not None:
+                doc_data["Destination Airport"] = destination_airport.value
 
-            add_notes = doc.fields.get('add_notes')
-            if add_notes.value is not None:
-                doc_data["Additional Notes"] = add_notes.value
+            shipper_account_number = doc.fields.get('Shipper_account_number')
+            if shipper_account_number.value is not None:
+                doc_data["Shipper Account Number"] = shipper_account_number.value
 
-            invoice_date = doc.fields.get('invoice_date')
-            if invoice_date.value is not None:
-                doc_data["Invoice Date"] = invoice_date.value
-
-            po_no = doc.fields.get('po_no')
-            if po_no.value is not None:
-                doc_data["PO Number"] = po_no.value
-
-            tax = doc.fields.get('tax')
-            if tax:
-                doc_data["Tax"] = tax.value
-
-            subtotal = doc.fields.get('subtotal')
-            if subtotal:
-                doc_data["Subtotal"] = subtotal.value
-
-            po_vendor_ct = doc.fields.get('po_vendor_ct')
-            if po_vendor_ct.value is not None:
-                doc_data["PO Vendor Count"] = po_vendor_ct.value
-
-            vendor_name = doc.fields.get('vendor_name')
-            if vendor_name.value is not None:
-                doc_data["Vendor Name"] = vendor_name.value
-
-            vendor_address = doc.fields.get('vendor_address')
-            if vendor_address.value is not None:
-                doc_data["Vendor Address"] = vendor_address.value
-
-            customer_name = doc.fields.get('customer_name')
-            if customer_name.value is not None:
-                doc_data["Customer Name"] = customer_name.value
-
-            total = doc.fields.get('total')
-            if total is not None:
-                doc_data["Total"] = total.value
-
-            customer_company = doc.fields.get('customer_company')
-            if customer_company.value is not None:
-                doc_data["Customer Company"] = customer_company.value
-
-            doc_date = doc.fields.get('receipt_date')
-            if doc_date.value is not None:
-                doc_data["Receipt Date"] = doc_date.value
-
-            receipt_id = doc.fields.get('receipt_id')
-            if receipt_id.value is not None:
-                doc_data["Receipt ID"] = receipt_id.value
-
-            customer_address = doc.fields.get('customer_address')
-            if customer_address.value is not None:
-                doc_data["Customer Address"] = customer_address.value
         results.append(doc_data)
 
     return render_template('results.html', results=results)
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    app.run(host="0.0.0.0", port=8000)
+    app.run(debug=True)
